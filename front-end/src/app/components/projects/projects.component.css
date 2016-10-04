@@ -1,0 +1,12 @@
+.project{
+	display: block;
+}
+.project:hover{
+	text-decoration: none;
+}
+.project-avatar{
+	height: 200px;
+	width: auto;
+	display: block !importance;
+	margin: auto;
+}

@@ -1,0 +1,22 @@
+<md-content class="md-padding" layout="row" layout-wrap layout-align=" start">
+  <md-list>
+      <md-subheader class="md-no-sticky">
+      	<h1>List Users <a href="/#/users/new"> <button md-raised-button class="md-raised md-primary">Create new user</button> </a></h1>
+      </md-subheader>
+      <md-list-item class="md-3-line" *ngFor="let user of users; ">
+        <img *ngIf="user.avatar" src="{{user.avatar}}" class="md-avatar" alt="{{user.username}}"/>
+        <img *ngIf="!user.avatar" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar" />
+        <div class="md-list-item-text" layout="column">
+          <h3>{{ user.username }}</h3>
+          <h4>{{ user.first_name }} {{user.last_name}}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+        <a href="/#/users/{{user.id}}"> <button md-raised-button class="md-raised md-primary">Detail</button> </a>  
+        <md-divider></md-divider>
+      
+      </md-list-item>
+      
+     
+    </md-list>
+ 
+</md-content>

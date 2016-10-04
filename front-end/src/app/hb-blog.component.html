@@ -1,0 +1,70 @@
+ <md-toolbar class="hb_menu fixed-toolbar" *ngIf="authenticated" style="margin-bottom:10px;display:block">
+        <button md-button class="md-icon-button" aria-label="Settings">
+          <i md-icon>menu</i>
+        </button>
+        <h2 class="title">
+          <span><a href="/#/" title="home" style="color: white"> HBLab Blog</a>  <strong>{{userInfo.username}}</strong></span>
+        </h2>
+        <!-- <div>
+          <input type="text" #search style="color: black"><button (click)="searchPost(search.value)">search</button>  
+        </div> -->
+        <span flex></span>
+        <a md-button href="/#/posts/new"
+               title="Viết bài"
+               aria-label="Viết bài"
+               class="md-button" >
+          <i md-icon>border_color</i>
+          <span class="icon-text">Viết bài</span>
+        </a>
+        <a md-button href="/#/projects"
+               title="Du an"
+               aria-label="Du an"
+               class="md-button" >
+          <i class="material-icons">work</i>
+          <span class="icon-text">Dự án</span>
+        </a>
+        <a md-button href="/#/"
+               title="Trang chủ"
+               aria-label="Trang chủ"
+               class="md-button" >
+          <i md-icon>home</i>
+          <span class="icon-text">Trang chủ</span>
+        </a>
+        <a md-button href="/#/users/"
+               title="Kho blog"
+               aria-label="Kho blog"
+               class="md-button" 
+               *ngIf=" adminIsLogin ">
+          <i md-icon>face</i>
+          <span class="icon-text">User</span>
+        </a>
+        <button md-button class="md-icon-button" aria-label="More" (click)="logout()">
+          <i class="material-icons">exit_to_app</i>
+        </button>
+    </md-toolbar>
+
+    
+<md-sidenav-container layout="row" flex class="md-pushed">
+
+  <md-sidenav name="menu_left" side class="menu_left" *ngIf=" authenticated && !projectPage ">   
+    <md-content>
+      <md-list>
+        <md-list-item class="md-2-line" *ngFor="let item of menuItems; let index = index ">
+          <img *ngIf="item.logo" src="{{item.logo}}" class="md-avatar" />
+          <img *ngIf="!item.logo" src="http://udeckservices.com/images/projectmanagement.jpg" class="md-avatar" />
+          <div class="md-list-item-text" layout="column">
+            <h3>
+              <a href="/#/projects/{{item.id}}" title="">{{ item.name }}</a>
+              
+            </h3>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </md-sidenav>
+  <md-content flex layout="column" tabindex="-1" role="main" class="container">
+      <app-search *ngIf="searchPage" [key]='search'></app-search>
+      <router-outlet></router-outlet>
+    </md-content>
+</md-sidenav-container>
+

@@ -1,0 +1,23 @@
+<div layout="colum">
+  <div flex=10></div>
+  <div flex="40">
+    <form name="project" #projectForm="ngForm" (submit)="save(projectForm.value)" #heroForm="ngForm"  >
+      <h1>{{title}}</h1>
+      <picture-uploader  [(ngModel)] = "project.logo" [uploaderOptions]="uploaderOptions"  #logo="ngForm" ngControl="logo"></picture-uploader>
+      <md-input type="text" [(value)]="project.name" [(ngModel)]="project.name"  #name = "ngForm" required style="width: 100%" ngControl="name">
+        <md-placeholder>
+          Name
+        </md-placeholder>
+      </md-input><br>
+      <md-input type="text" [(value)]="project.description" [(ngModel)]="project.description"  #description = "ngForm" required style="width: 100%" ngControl="description">
+        <md-placeholder>
+          Description
+        </md-placeholder>
+      </md-input><br>
+      <datepicker class="test" required [(ngModel)] ="project.start_at" #start_at="ngForm" ngControl="start_at" placeholder = "start_at"></datepicker><br>
+      <div [hidden]="start_at.valid || start_at.pristine" class="">Content is required</div>
+      <datepicker class="test" [(ngModel)] ="project.end_at" #end_at="ngForm" ngControl="end_at" placeholder = "end_at"></datepicker><br>
+      <button md-raised-button class="md-raised md-primary" style="background-color: #3f51b5">{{button}}</button>
+    </form>
+  </div>
+</div>

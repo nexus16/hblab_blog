@@ -1,0 +1,52 @@
+
+<div>
+  <input type="text" #search style="color: black"><button (click)="searchPost(search.value)">search</button>  
+</div>
+<div *ngIf="!onSearch" layout="column" layout-align="center center" style="margin-bottom:40px;">
+	<md-list>
+    <md-list-item *ngFor="let post of posts; let index = index" class="md-3-line">
+        <a *ngIf=" post.created_user" href="/#/users/{{post.created_user.id}}" title="">
+          <img *ngIf=" post.created_user.avatar " src="{{post.created_user.avatar}}" class="md-avatar"/>
+          <img *ngIf=" !post.created_user.avatar " src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/>
+        </a>
+        <a *ngIf=" !post.created_user" href="/#/posts" title=""><img src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/></a>
+        <div class="md-list-item-text">
+          <h3>
+            <a href="/#/posts/{{post.id}}">{{ post.title }} </a> 
+            <span *ngFor="let tag of post.tags">
+              <strong class="tag" *ngIf="tag"><a href="#/tag/{{tag.name}}" title="">{{tag.name}}</a></strong>
+            </span>
+      	  </h3>
+          <p> {{ post.short_content }} </p>
+          <p *ngIf="post.created_user"><a href="/#/users/{{post.created_user.id">{{post.created_user.username}}</a></p>
+        </div>
+        <md-divider></md-divider>
+      </md-list-item>
+	</md-list>
+	<md-progress-circle *ngIf="isload" mode="indeterminate"></md-progress-circle>
+	<button *ngIf="!isload" (click)="getPost()" md-raised-button class="md-raised md-primary">Load more</button>
+</div>
+
+
+<div *ngIf="onSearch" layout="column" layout-align="center center" style="margin-bottom:40px;">
+  <md-list>
+    <md-list-item *ngFor="let post of postSearch; let index = index" class="md-3-line">
+        <a *ngIf=" post.created_user" href="/#/users/{{post.created_user.id}}" title="">
+          <img *ngIf=" post.created_user.avatar " src="{{post.created_user.avatar}}" class="md-avatar"/>
+          <img *ngIf=" !post.created_user.avatar " src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/>
+        </a>
+        <a *ngIf=" !post.created_user" href="/#/posts" title=""><img src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/></a>
+        <div class="md-list-item-text">
+          <h3>
+            <a href="/#/posts/{{post.id}}">{{ post.title }} </a> 
+            <span *ngFor="let tag of post.tags">
+              <strong class="tag" *ngIf="tag"><a href="#/tag/{{tag.name}}" title="">{{tag.name}}</a></strong>
+            </span>
+          </h3>
+          <p> {{ post.short_content }} </p>
+          <p *ngIf="post.created_user"><a href="/#/users/{{post.created_user.id">{{post.created_user.username}}</a></p>
+        </div>
+        <md-divider></md-divider>
+      </md-list-item>
+  </md-list>
+</div>

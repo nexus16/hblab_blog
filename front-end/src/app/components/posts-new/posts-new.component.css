@@ -1,0 +1,86 @@
+
+form {
+	margin-bottom: 100px;
+}
+form .form-group{
+	margin-top: 5px;
+	float: left;
+}
+form .html,
+form .md {
+	border: 1px solid rgba(0,0,0,0.15);
+}
+form .html,
+form textarea {
+	min-height: 590px!important;
+	border: none;
+}
+form .html {
+	padding: 2px 8px;
+	margin-top: 18px;
+	margin-left: 10px;
+}
+
+form .card {
+	flex: 1;
+    height: 600px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+form md-input{
+	width: 100%;
+}
+md-input-container .md-errors-spacer {
+	min-height: 0;
+}
+
+md-input-container.md-input-focused label.content:not(.md-no-float) {
+	top: -20px;
+}
+.view div{
+	overflow-y: scroll;
+	margin-top: 31px;
+}
+.dropdown_container{
+	position: relative;
+	
+}
+.md-dropdown{
+	overflow-x:hidden;
+	height: 300px;
+	position: absolute;
+	z-index: 9000;
+	background: #fff;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  top: 40px;
+}
+.md-avatar{
+	margin: 0px;
+}
+.title{
+	line-height: 60px !important;
+	font-weight: bold !important;
+}
+.subject{
+	cursor: pointer;
+}
+.subject:hover{
+	background-color: #ccc;
+}
+.selected{
+	background-color: #ccc;
+}
+.overlay{
+	background-color: rgba(0,0,0,0);
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 900;
+}

@@ -1,0 +1,70 @@
+<div class="content">
+  <h3>{{post.title}}</h3>
+  <div layout="row">
+  	<div flex="70">
+  		
+  	</div>
+  	<div flex="30" layout-align="end center">
+          <a md-button href="/#/posts/{{ post.id }}/edit"
+                 title="Sửa bài viết"
+                 aria-label="Sửa bài viết"
+                 class="md-button" >
+            <i md-icon>edit</i>
+            <span class="icon-text">Sửa bài viết</span>
+          </a>
+  	</div>
+  </div>
+  <div class="post_content" [innerHTML]="post.content"></div>
+</div>
+
+
+<hr>
+
+
+<div >
+  <div class="comment" *ngIf=" listComment" *ngFor=" let comment of listComment" >
+    
+    <div class="avatar" *ngIf=" comment">
+      <a  href="/#/users/{{comment.created_user.id}}" title="">
+        <img *ngIf=" comment.created_user " src="{{comment.created_user.avatar}}" />
+        <img *ngIf=" !comment.created_user" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/>
+      </a>
+    </div>
+
+    <div class="comment-content" *ngIf=" comment">
+      <h4><strong><a href="/#/users/{{comment.created_user.id}}" title="">{{comment.created_user.username}}</a></strong></h4>
+      <p [innerHTML]="comment.content"></p>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+
+</div>
+
+
+<div class="add-comment">
+<!--
+  <div class="avatar">
+    <a *ngIf=" post.created_user" href="/#/users/{{post.created_user.id}}" title="">
+      <img *ngIf=" post.created_user.avatar " src="{{post.created_user.avatar}}" />
+      <img *ngIf=" !post.created_user.avatar " src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="md-avatar"/>
+    </a>
+    <a *ngIf=" !post.created_user" href="/#/posts" title=""><img src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" /></a>
+  </div>
+-->
+  <div class="comment-content">
+    <textarea class="md-input" #comment>
+    </textarea>
+    <div  [innerHTML]="commentMarked"> </div>
+  </div>
+
+   <div class="clearfix"></div>
+  <div style="margin-left: 70px">
+    <button (click)="addComment(comment.value)">Comment</button>
+  <button (click)="convertMark(comment.value)">demo</button>
+  </div>
+
+</div>
+
+<div style="margin-bottom: 100px">
+  
+</div>

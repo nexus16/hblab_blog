@@ -1,0 +1,65 @@
+<md-content class="md-padding" layout-wrap layout-align=" start" >
+	<h3>{{title}}</h3>
+
+	<form #userForm="ngForm" name="user" (submit)="save(userForm.value)">
+		<div layout="row">
+			<div flex="30">
+				<md-input [(value)]="user.username" [(ngModel)]="user.username" ngControl="username" #username="ngForm" required (focusout)="checkExistedUsername(user.username)">
+					<md-placeholder>
+			        	username
+			      	</md-placeholder>  	
+				</md-input>
+				<div [hidden]="username.valid || username.pristine" class="">
+      				<strong class="color-red">username is required</strong>
+    			</div>
+    			<div *ngIf="usernameExisted">
+    				<strong class="color-red">username existed !</strong>
+    			</div>
+
+				<md-input [(value)]="user.password" [(ngModel)]="user.password" ngControl="password" #password="ngForm" required>
+					<md-placeholder>
+			        	password
+			      	</md-placeholder>
+				</md-input>
+				<div [hidden]="password.valid || password.pristine" class="">
+      				<strong class="color-red">password is required</strong>
+    			</div>
+
+				<md-input [(value)]="user.first_name" [(ngModel)]="user.first_name" ngControl="first_name" #first_name="ngForm" >
+					<md-placeholder>
+			        	first name
+			      	</md-placeholder>
+				</md-input>
+				
+				<md-input [(value)]="user.last_name" [(ngModel)]="user.last_name" ngControl="last_name" #last_name="ngForm" >
+					<md-placeholder>
+			        	last name
+			      	</md-placeholder>
+				</md-input>
+				
+				<md-input [(value)]="user.email" [(ngModel)]="user.email" ngControl="email" #email="ngForm" required (focusout)="checkExistedEmail(user.email)">
+					<md-placeholder>
+			        	email
+			      	</md-placeholder>
+				</md-input>
+				<div [hidden]="email.valid || email.pristine" class="">
+      				<strong class="color-red">email is required</strong>
+    			</div>
+    			<div *ngIf="emailExisted">
+    				<strong class="color-red">email existed !</strong>
+    			</div>
+
+
+				<picture-uploader  [(ngModel)] = "user.avatar" [uploaderOptions]="uploaderOptions"  #avatar="ngForm" ngControl="avatar"></picture-uploader>
+				<br>
+				<button md-raised-button class="md-raised md-primary" [disabled]="!userForm.form.valid || usernameExisted || emailExisted" type=" submit">{{button}}</button>
+			</div>
+			<!-- 
+			<div flex="20">
+				<img src="{{user.avatar}}" alt="{{user.username}}" class="img-circle img-responsive center-block" width="200px" height="200px" >
+				<h3 class="text-center">{{user.username}}</h3>
+	      		<h4 class="text-center">{{user.email}}</h4>   
+			</div> -->
+		</div>
+	</form>
+</md-content>

@@ -1,0 +1,147 @@
+<div layout="row" *ngIf=" projectSelected && !editDescription">
+
+  <div  flex="30" class="text-center left">
+      <img *ngIf="projectSelected.logo" src="{{projectSelected.logo}}"  class="img-responsive" >  
+      <img *ngIf="!projectSelected.logo" src="http://udeckservices.com/images/projectmanagement.jpg"  class="img-responsive" >  
+      <h3>{{projectSelected.name}}</h3>
+      <a href="/#/projects/{{projectSelected.id}}/edit" ><button md-raised-button class="md-raised md-primary" type="button">Update</button></a>
+      <div>
+        <h4 class="subjectAll"  (click)="getAllPost()">ALL</h4>
+        <h4 class="subject text-left" *ngFor=" let subject of listSubjects; ">
+         
+          <div class="display-subject " *ngIf="!subject.display"  (click)="getPostBySubject(subject.id)" >{{subject.title}}</div>
+          <div class="edit-subject " *ngIf="subject.display" >
+            <input #subjectEdit [(ngModel)]="subject.title"  (focusout)="updateSubject(subjectEdit.value,subject)">
+          </div>
+          
+         
+          <div class="delete" (click)="confirmSubject.show()"><span class="glyphicon glyphicon-remove"></span></div>
+
+          <div class="edit" (click)="goToEdit(subject.id)"><span class="glyphicon glyphicon-pencil"></span></div>
+
+          <md-dialog #confirmSubject (onClose)="confirmCloseSubject($event,subject)">
+            <md-dialog-title>Would you like to delete <strong>{{subject.title}}</strong></md-dialog-title>
+            <md-dialog-actions ok="delete" cancel="cancel">
+            </md-dialog-actions>
+          </md-dialog>
+
+
+        </h4>
+         
+         
+            <md-input #title>
+              Add subject
+            </md-input>
+            <button md-raised-button class="md-raised md-primary" (click)="addSubject(title.value)" >add</button>
+         
+    </div>
+  </div>
+  <div flex="5"></div>
+  <div flex="65" class="right">
+    <md-tab-group>
+    
+
+     <md-tab>
+      <template md-tab-label>Description</template>
+      <template md-tab-content> 
+          <md-content class="md-padding" layout="row" layout-wrap layout-align=" start" >
+          <button (click)="goEditDescription()">edit</button>
+            <p [innerHTML]="projectSelected.description"></p>
+          </md-content>
+      </template>
+    </md-tab>
+
+    <md-tab>
+      <template md-tab-label>Post</template>
+      <template md-tab-content> 
+          
+          <md-content class="md-padding" layout="row" layout-wrap layout-align=" start" >
+            <md-list-item *ngFor=" let post of posts; " >
+              <img *ngIf=" post.created_user " src="{{post.created_user.avatar}}" class="md-avatar"/>
+              <div class="md-list-item-text">
+                <h3>
+                  <a href="/#/posts/{{post.id}}">{{ post.title }} </a>
+                </h3>
+                <p> {{ post.short_content }} </p>
+              </div>
+            </md-list-item>
+          </md-content>
+      </template>
+    </md-tab>
+
+    <md-tab>
+      <template md-tab-label>Member</template>
+      <template md-tab-content>
+        <md-content class="md-padding">
+
+          <md-list-item *ngFor="let member of members; let i = index " class="list-inline" flex="1">
+            <img src="{{member.avatar}}" class="md-avatar"/>
+            <div class="md-list-item-text">
+              <h3>{{member.username}}</h3>
+            </div>
+            <md-switch [(checked)]="member.leader"  (checkedChange)="onChange($event,member,i)">
+              Set leader
+            </md-switch>
+            <md-dialog #confirm (onClose)="confirmClose($event,member)">
+              <md-dialog-title>Would you like to delete <strong>{{member.username}}</strong></md-dialog-title>
+             
+              <md-dialog-actions ok="delete" cancel="cancel">
+                
+              </md-dialog-actions>
+            </md-dialog>
+            <button md-raised-button class="md-raised md-primary" (click)="confirm.show()">Delete</button>    
+          </md-list-item><br>
+          <md-input type="text" style="width: 50%" #searchBox id="search-box" (keyup)="search(searchBox.value)">
+            <md-placeholder>
+              Input name or email
+            </md-placeholder>
+          </md-input><br>
+          <md-list-item *ngFor=" let user of ListUserSearch;">
+            <img src="{{user.avatar}}" class="md-avatar"/>
+            <div class="md-list-item-text">
+              <h3><a>{{ user.username }} </a></h3>
+            </div>
+            <button md-raised-button class="md-raised md-primary" (click)="addUSer(user)">add</button>    
+
+          </md-list-item>
+        </md-content>
+      </template>
+    </md-tab>
+
+  </md-tab-group>
+
+  </div>
+
+</div>
+
+
+<!-- <div layout="row" *ngIf=" projectSelected && editDescription">
+   <div flex="50">
+      <textarea class="md-input" [(ngModel)]="projectSelected.description"  (ngModelChange)="updateValue(projectSelected.description)">
+      </textarea>
+    </div>
+    <div flex="50"  >
+      <div  [innerHTML]="html">
+      </div>
+    </div>
+
+    <button (click)="updateDescription(projectSelected.description)">Update</button>
+  
+</div> -->
+
+<div *ngIf=" projectSelected && editDescription">
+  <div layout="row" layout-xs="column">
+    <div flex>
+      <md-card class="card">
+          <textarea class="md-input" [(ngModel)]="projectSelected.description"  columns="10" md-maxlength="150" rows="125" #content="ngForm" required  (ngModelChange)="updateValue(projectSelected.description)">
+          </textarea>
+      </md-card>
+    </div>
+    <div flex class="view">
+      <div class="card html post_content" [innerHTML]="html">
+
+      </div>
+    </div>
+  </div>
+  <button (click)="updateDescription(projectSelected.description)">Update</button>
+</div>

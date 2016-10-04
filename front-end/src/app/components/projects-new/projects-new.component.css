@@ -1,0 +1,11 @@
+span.md-input-ripple{
+  background-color: #3f51b5 !important;
+}
+form{
+	/*position: fixed;*/
+  /*width: 500px;*/
+}
+picture-uploader{
+	margin-bottom: 20px;
+	display: block;
+}

@@ -1,0 +1,23 @@
+
+md-card{
+	padding: 10px;
+	width: 400px;
+	margin: auto;
+	margin-top: 200px;
+}
+md-input{
+	margin:10px;
+	display: block;
+}
+md-card-title{
+	color: #3f51b5;
+	font-size: 20px;
+}
+.button-login{
+	background:#3f51b5;
+	color: #fff;
+	margin-left: 10px;
+}
+.md-input-placeholder.md-float.md-focused{
+	color: #3f51b5;
+}

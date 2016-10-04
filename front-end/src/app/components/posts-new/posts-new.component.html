@@ -1,0 +1,77 @@
+	<div class="overlay" aria-hidden="true"
+    *ngIf="select" 
+    (click)="close()">
+    </div>
+<div style="margin-top: 100px">
+  
+</div>
+
+<tag-input  placeholder="Add an tag"  [(ngModel)]="tags"  delimiterCode="188">
+  </tag-input>
+<button (click)="listTagInsert()">xem</button>
+
+  <form name="post" #postForm="ngForm" (submit)="save($event,postForm.value)">
+    <md-input  [(ngModel)]="post.title" ngControl="title" #title="ngForm" required (focusout)="checkTitleLength(post.title)">
+      <md-placeholder>
+        Title
+      </md-placeholder>
+    </md-input>
+    <div [hidden]="title.valid || title.pristine" class="" style="color: red">
+      Title is required
+    </div>
+
+    <div *ngIf="!checkTitle" style="color: red">
+      Length of title must be than 10 character
+    </div>
+    <!-- <md-input-container class="md-block">
+        <label>Tags</label>
+        <input md-input [(value)]="post.tags" [(ngModel)]="post.tags" ngControl="tags" >
+    </md-input-container> -->
+    <md-switch [checked]="isprivate" aria-label="Switch 6" (checkedChange)="isprivate=!isprivate">
+    Set Private
+  </md-switch>
+  <div *ngIf="isprivate" class="dropdown_container">
+    <md-input [ngModel] = "subjectSelected.id" hide="true" ngControl="subject_id" #subject_id="ngForm"></md-input>
+    <md-input [ngModel] = "subjectSelected.title" (click)="show($event)">
+      <md-placeholder>
+        Private
+      </md-placeholder>
+    </md-input>
+    <div *ngIf="select" class="md-dropdown">
+      <md-list-item  *ngFor="let item of projects; let index = index" class="md-2-line">
+        <img *ngIf="item.logo" [src]="item.logo" class="md-avatar" alt="{{item.title}}"/>
+        <img *ngIf="!item.logo" src="http://udeckservices.com/images/projectmanagement.jpg" class="md-avatar" alt="{{item.title}}"/>
+        <div class="md-list-item-text" layout="column">
+          <h3 class="title">{{ item.name }}</h3>
+          <div class="subjects">
+            <md-list-item [ngClass]="{'selected': isSelected(subject)}" class="subject" *ngFor="let subject of item.subjects" (click)="choseSelect(subject)">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ subject.title }}</h3>
+              </div>
+            </md-list-item>
+          </div>
+        </div>
+      </md-list-item>
+    </div>
+  </div>
+    <div layout="row" layout-xs="column">
+      <div flex>
+        <label class="content" for="content">Content</label>
+        <md-card class="card">
+            <textarea class="md-input" [(ngModel)]="post.content" ngControl="content" columns="10" md-maxlength="150" rows="125" #content="ngForm" required  (ngModelChange)="updateValue(post.content)">
+            </textarea>
+            <div [hidden]="content.valid || content.pristine" class="">
+                  Content is required
+            </div>
+        </md-card>
+      </div>
+      <div flex class="view">
+        <div class="card html post_content" [innerHTML]="html">
+
+        </div>
+      </div>
+    </div>
+  
+  <button md-raised-button class="md-raised md-primary" [disabled]="!postForm.form.valid" type="submit"  >Create</button>
+	</form>
+	<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>

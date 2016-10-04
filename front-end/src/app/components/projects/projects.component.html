@@ -1,0 +1,26 @@
+
+<div style="margin-top: 100px;">
+	<a href="/#/projects/new" title=""><button md-raised-button class="md-raised md-primary" style="background-color: #3f51b5">Create new</button></a>
+</div>
+<md-content class="md-padding" layout="row" layout-wrap layout-align=" start">
+  <div flex="33" layout="column" flex-xs="100" *ngFor=" let project of projects; " >
+    <a class="project" href="/#/projects/{{project.id}}" title="" >
+      <md-card>
+      <md-card-title>
+        <img *ngIf=" project.logo " src="{{project.logo}}" class="project-avatar"/>  
+        <img *ngIf=" !project.logo " src="http://udeckservices.com/images/projectmanagement.jpg" class="project-avatar"/>  
+      </md-card-title>
+      <md-card-content>
+        <h2><span class="md-headline">{{project.name}}</span>
+        </h2>
+        <p>number of post: {{project.posts.length}}</p>
+        <p>number of member: {{project.project_members.length}}</p>
+        <p>start : {{project.start_at}}</p>
+        <p>end : {{project.end_at}}</p>
+      </md-card-content>
+    </md-card>
+    </a>
+    
+  </div>
+ 
+</md-content>

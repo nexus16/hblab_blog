@@ -1,0 +1,28 @@
+
+    <md-card>
+      <md-card-header>
+        <md-card-title>Login</md-card-title>
+      </md-card-header>
+      <form name="loginForm" #loginForm="ngForm">
+        <div *ngIf="error" class="alert alert-danger">
+         username or password is incorrect
+        </div><br> 
+        <md-input [(value)]="loginForm.username" [(ngModel)]="loginForm.username" ngControl="username" #username="ngForm" required>
+          <md-placeholder>
+            Username
+          </md-placeholder>
+        </md-input>
+        <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          Name is required
+        </div><br>
+        <md-input [(value)]="loginForm.password" [(ngModel)]="loginForm.password" ngControl="password" #password="ngForm" type="password" required>
+        <md-placeholder>
+          Password
+        </md-placeholder>
+          </md-input>
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          Password is required
+        </div><br>    
+        <button md-raised-button class="button-login" (click)="login(username.value, password.value)" type="submit">Login</button>
+      </form>
+    </md-card>

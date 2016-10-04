@@ -1,0 +1,34 @@
+.content{
+	padding: 20px;
+	line-height: 30px;
+	color: #4a4a4a;
+}
+
+
+.avatar{
+	width: 50px;
+	height: 50px;
+	margin-right: 20px;
+	float: left;
+	
+
+}
+.avatar img{
+	width: 50px;
+	height: 100%;
+	border-radius: 50%;
+}
+.comment-content{
+	width: 800px;
+	float: left;
+}
+.add-comment{
+	
+}
+.add-comment textarea{
+	display: block;
+	width: 100%;
+}
+.add-comment .demo{
+
+}

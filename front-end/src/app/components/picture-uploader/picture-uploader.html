@@ -1,0 +1,17 @@
+<div class="picture-group" [ngClass]="{uploading: uploadInProgress}">
+  <div class="picture-wrapper" (click)="bringFileSelector();">
+    <img src="{{ value }}" *ngIf="value">
+    <img src="{{ defaultPicture }}" *ngIf="!value && defaultPicture">
+
+    <div class="loading" *ngIf="uploadInProgress">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div>
+  <i class="fa fa-minus-circle" aria-hidden="true" (click)="removePicture();" *ngIf="value && canDelete"></i>
+  <a href class="change-picture" (click)="bringFileSelector();">Change profile Picture</a>
+  <input #fileUpload type="file" hidden="true" id="uploadFile"  (change)="onFiles()">
+  <input #fileUrl type="text" hidden="true" id="fileUrl" [(ngModel)]="value" >
+</div>

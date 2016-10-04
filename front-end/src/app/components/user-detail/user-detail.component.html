@@ -1,0 +1,23 @@
+<div layout="row" *ngIf=" user " style="margin-top: 20px">
+	
+	<div flex="50" layout="column">
+      <md-list-item *ngFor=" let post of posts; " >
+       
+        <div class="md-list-item-text">
+          <h3>
+            <a href="/#/posts/{{post.id}}">{{ post.title }} </a>
+          </h3>
+          <p> {{ post.short_content }} </p>
+        </div>
+        <md-divider></md-divider>
+      </md-list-item>
+    </div>
+    <div flex="30">
+      <img *ngIf="user.avatar" src="{{user.avatar}}" alt="{{user.username}}" class="img-responsive center-block" width="200px" height="200px" >
+      <img *ngIf="!user.avatar" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png" class="img-responsive center-block" width="200px" height="200px" >
+      <h3 class="text-center">{{user.username}}</h3>
+      <h4 class="text-center">{{user.email}}</h4>     
+      <a href="/#/users/{{user.id}}/edit" class="text-center"><button md-raised-button class="md-raised md-primary" type="button">Update</button></a>
+            
+  </div>
+</div>
